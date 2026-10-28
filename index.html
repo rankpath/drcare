@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#167D87">
+<meta name="description"
+      content="DrCare Dashboard — ข้อมูลชัดเจน ส่งต่ออย่างมั่นใจ">
+<title>DrCare Dashboard — Notification Workspace</title>
+<meta name="robots" content="index, follow">
+<!-- TODO: production domain unknown. Once known, add:
+<link rel="canonical" href="https://YOUR-DOMAIN/">
+<meta property="og:url" content="https://YOUR-DOMAIN/">
+<meta property="og:image" content="https://YOUR-DOMAIN/og-image.png">
+<meta name="twitter:image" content="https://YOUR-DOMAIN/og-image.png">
+and switch twitter:card to "summary_large_image". og-image.png (1200x630) is in this folder. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DrCare Dashboard">
+<meta property="og:locale" content="th_TH">
+<meta property="og:title" content="DrCare Dashboard — Notification Workspace">
+<meta property="og:description" content="DrCare Dashboard — ข้อมูลชัดเจน ส่งต่ออย่างมั่นใจ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DrCare Dashboard — Notification Workspace">
+<meta name="twitter:description" content="DrCare Dashboard — ข้อมูลชัดเจน ส่งต่ออย่างมั่นใจ">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="fonts/prompt-regular-thai-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหา</a>
+<header>
+  <div class="header-inner">
+    <a class="brand" href="#" aria-label="DrCare Dashboard หน้าหลัก">
+      <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+        <rect width="40" height="40" rx="12" fill="#167D87"/>
+        <path d="M8 25c7 0 6-15 14-15s6 15 11 10"
+              fill="none" stroke="white" stroke-width="2.8"
+              stroke-linecap="round"/>
+        <g fill="white">
+          <circle cx="8" cy="25" r="2.8"/>
+          <circle cx="33" cy="20" r="2.8"/>
+        </g>
+      </svg>
+      DrCare Dashboard
+    </a>
+    <nav aria-label="เมนูหลัก">
+      <a href="#dashboard">Dashboard</a>
+      <a href="#guide">คู่มือ</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="hero">
+    <div class="eyebrow">CLEAR SIGNALS. CONFIDENT CARE.</div>
+    <h1>ข้อมูลชัดเจน<br><span>ส่งต่ออย่างมั่นใจ</span></h1>
+    <p class="muted">
+      เตรียม ตรวจสอบ และติดตามการแจ้งเตือนในพื้นที่เดียว
+      เพื่อให้ทีมดูแลเห็นขั้นตอนและรับช่วงงานได้อย่างชัดเจน
+    </p>
+    <a class="button" href="#dashboard">ทดลองใช้ Dashboard</a>
+  </section>
+  <section id="dashboard" aria-label="Dashboard จำลอง">
+    <div class="notice">
+      <strong>DEMO</strong> — ใช้ข้อมูลตัวอย่างเท่านั้น
+      ไม่มีการส่งข้อมูลไปยัง Make, Claude หรือ LINE
+    </div>
+    <div class="metrics">
+      <div class="card metric">
+        รายการในหน้านี้
+        <strong id="total">0</strong>
+      </div>
+      <div class="card metric">
+        จำลองรับเข้า Make
+        <strong id="accepted">0</strong>
+      </div>
+      <div class="card metric">
+        LINE API ตอบรับ
+        <strong>—</strong>
+      </div>
+    </div>
+    <div class="layout">
+      <section class="card">
+        <h2>สร้างรายการแจ้งเตือน</h2>
+        <p class="muted">ตรวจสอบข้อมูลก่อนจำลองการส่ง</p>
+        <form id="event-form" novalidate>
+          <div class="fields">
+            <div>
+              <label for="event">ประเภทเหตุการณ์</label>
+              <select id="event">
+                <option value="new_record">รายการใหม่</option>
+                <option value="status_changed">สถานะเปลี่ยนแปลง</option>
+                <option value="appointment_reminder">เตือนนัดหมาย</option>
+              </select>
+            </div>
+            <div>
+              <label for="record">เลขที่รายการ</label>
+              <input id="record" value="DC-TEST-001"
+                     required maxlength="60">
+            </div>
+            <div>
+              <label for="reference">รหัสอ้างอิงผู้รับบริการ</label>
+              <input id="reference" value="PT-XXX-102" maxlength="60">
+            </div>
+            <div>
+              <label for="clinic">สาขา</label>
+              <select id="clinic">
+                <option>DrCare · สุขุมวิท</option>
+                <option>DrCare · ลาดพร้าว</option>
+                <option>DrCare · สำนักงานใหญ่</option>
+              </select>
+            </div>
+            <div class="full">
+              <label for="message">ข้อความตัวอย่าง</label>
+              <textarea id="message" required maxlength="500" aria-describedby="message-count">มีรายการใหม่รอตรวจสอบ กรุณาส่งต่อให้ทีมผู้รับผิดชอบ</textarea>
+              <small id="message-count"><span id="count">0</span> / 500 ตัวอักษร</small>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="button" id="send" type="submit">
+              จำลองการส่งเข้า Make
+            </button>
+          </div>
+          <div id="feedback" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+      <div class="stack">
+        <section class="card">
+          <h2>Payload preview</h2>
+          <p class="muted">ข้อมูลเปลี่ยนตามฟอร์มแบบทันที</p>
+          <pre id="payload" tabindex="0"></pre>
+          <button class="button secondary" id="copy" type="button">
+            คัดลอก JSON
+          </button>
+        </section>
+        <section class="card">
+          <h2>สถานะการเชื่อมต่อ</h2>
+          <p><span class="badge" id="connection" role="status">ยังไม่ทดสอบ</span></p>
+          <p class="muted">การทดสอบนี้จำลองผลภายในหน้าเท่านั้น</p>
+          <button class="button secondary" id="test" type="button">
+            จำลองการทดสอบ
+          </button>
+        </section>
+      </div>
+    </div>
+    <section class="card activity">
+      <div class="activity-heading">
+        <h2 id="activity-title">รายการล่าสุด <span class="badge">ข้อมูลจำลอง</span></h2>
+        <input id="search" type="search" placeholder="ค้นหารายการ…"
+               aria-label="ค้นหารายการ">
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="activity-title">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">เวลา</th>
+              <th scope="col">เลขที่รายการ</th>
+              <th scope="col">สาขา</th>
+              <th scope="col">สถานะ</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+  <section class="card" id="guide">
+    <h2>คู่มือและขอบเขตการใช้งาน</h2>
+    <details open>
+      <summary>เริ่มต้นอย่างไร?</summary>
+      <p>กรอกข้อมูลตัวอย่าง ตรวจสอบ Payload แล้วกดจำลองการส่ง
+         รายการจะปรากฏในตารางด้านล่าง</p>
+    </details>
+    <details>
+      <summary>ส่งข้อความจริงหรือไม่?</summary>
+      <p>ไม่ส่งจริง เว็บไซต์นี้ไม่มีการเชื่อม Make, Claude หรือ LINE API
+         ผลสำเร็จเป็นสถานะจำลองเท่านั้น</p>
+    </details>
+    <details>
+      <summary>ข้อมูลถูกเก็บไว้หรือไม่?</summary>
+      <p>ข้อมูลฟอร์มและรายการอยู่ในหน่วยความจำของหน้า
+         เมื่อโหลดหน้าใหม่ ข้อมูลจะเริ่มต้นใหม่
+         ไม่มีฐานข้อมูลหรือบัญชีผู้ใช้ใน Demo นี้</p>
+    </details>
+    <details>
+      <summary>พร้อมใช้กับงานคลินิกจริงหรือยัง?</summary>
+      <p>ยังเป็น Demo การใช้งานจริงต้องเพิ่มระบบผู้ใช้ สิทธิ์เข้าถึง
+         การจัดเก็บข้อมูล และการยืนยันสถานะจากแต่ละบริการ
+         DrCare Dashboard ไม่ใช่เครื่องมือวินิจฉัยโรค</p>
+    </details>
+  </section>
+</main>
+<footer>
+  DrCare Dashboard · Clear signals. Confident care. · Interactive Demo
+</footer>
+<script src="js/app.js" defer></script>
+</body>
+</html>
