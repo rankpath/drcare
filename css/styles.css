@@ -1,0 +1,245 @@
+/* DrCare Dashboard — Vicky's original CSS (verbatim except the font stack and the
+   --muted contrast fix), followed by small accessibility/responsive additions. */
+@font-face {
+  font-family: "Prompt";
+  src: url("../fonts/prompt-regular-thai-latin.woff2") format("woff2");
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Prompt";
+  src: url("../fonts/prompt-semibold-thai-latin.woff2") format("woff2");
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --teal: #167D87;
+  --slate: #20364A;
+  --mint: #DFF3EC;
+  --background: #F7F9FB;
+  --border: #E5EDF1;
+  --muted: #5A7180; /* was #657D8C (4.3:1 on white, below WCAG AA 4.5:1) */
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--slate);
+  font: 16px/1.7 "Prompt", system-ui, sans-serif;
+}
+button, input, select, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+a { color: var(--teal); }
+button { cursor: pointer; }
+button:disabled { opacity: .6; cursor: wait; }
+:focus-visible { outline: 3px solid #55AEB5; outline-offset: 3px; }
+header {
+  background: white;
+  border-bottom: 1px solid var(--border);
+}
+.header-inner, main, footer {
+  max-width: 1180px;
+  margin: auto;
+  padding: 24px;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--slate);
+  font-size: 26px;
+  font-weight: 700;
+}
+.brand svg { width: 42px; height: 42px; }
+nav { display: flex; gap: 20px; font-size: 14px; }
+nav a { text-decoration: none; }
+.hero { padding: 48px 0; max-width: 760px; }
+.eyebrow {
+  color: var(--teal);
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+h1 {
+  font-size: clamp(32px, 5vw, 54px);
+  line-height: 1.35;
+  margin: 16px 0;
+}
+h1 span { color: var(--teal); }
+h2 { font-size: 20px; margin: 0 0 12px; }
+p { margin: 0 0 16px; }
+.muted, small { color: var(--muted); }
+.button {
+  display: inline-block;
+  padding: 11px 18px;
+  border: 1px solid var(--teal);
+  border-radius: 8px;
+  background: var(--teal);
+  color: white;
+  text-decoration: none;
+}
+.secondary {
+  background: white;
+  color: var(--teal);
+}
+.badge {
+  display: inline-block;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: var(--mint);
+  color: #32745B;
+  font-size: 12px;
+}
+.notice {
+  padding: 14px 18px;
+  background: #EAF4F3;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.metric strong {
+  display: block;
+  font-size: 34px;
+  margin-top: 8px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+label { display: block; margin-bottom: 6px; font-size: 14px; }
+input, select, textarea {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #CCD9E0;
+  border-radius: 7px;
+  color: var(--slate);
+  background: #FCFDFE;
+}
+textarea { min-height: 120px; resize: vertical; }
+.full { grid-column: 1 / -1; }
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+pre {
+  background: var(--slate);
+  color: #C0E7DC;
+  border-radius: 9px;
+  padding: 20px;
+  font: 13px/1.8 monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.stack { display: grid; gap: 20px; }
+.activity { margin-top: 20px; }
+.activity-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.activity-heading input { max-width: 260px; }
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-top: 16px;
+}
+th, td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+th { background: var(--background); }
+#feedback { min-height: 28px; margin-top: 14px; color: var(--teal); }
+details { border-top: 1px solid var(--border); padding: 16px 0; }
+summary { cursor: pointer; font-weight: 600; }
+details p { margin: 12px 0 0; }
+#guide { margin-top: 30px; }
+footer { font-size: 13px; color: var(--muted); }
+@media (max-width: 760px) {
+  .layout { grid-template-columns: 1fr; }
+  .header-inner, main, footer { padding: 18px; }
+  .hero { padding: 30px 0; }
+  .card { padding: 18px; }
+  .metrics { gap: 8px; }
+  .metric { padding: 14px; font-size: 12px; }
+  .metric strong { font-size: 28px; }
+  .fields { grid-template-columns: 1fr; }
+  .activity-heading { align-items: stretch; flex-direction: column; }
+  .activity-heading input { max-width: none; }
+  nav { gap: 12px; font-size: 12px; }
+}
+
+/* ---- accessibility additions ---- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link {
+  position: absolute;
+  left: 12px; top: -60px;
+  z-index: 10;
+  padding: 8px 14px;
+  background: var(--slate);
+  color: white;
+  border-radius: 8px;
+}
+.skip-link:focus { top: 12px; }
+nav a { padding: 6px 2px; }
+nav a:hover, .button.secondary:hover { text-decoration: underline; }
+.button:hover:not(:disabled) { filter: brightness(1.08); }
+input::placeholder, textarea::placeholder { color: #6B7F8C; opacity: 1; }
+:target { scroll-margin-top: 16px; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+td { overflow-wrap: anywhere; }
+
+/* ---- responsive refinements ---- */
+@media (max-width: 960px) {
+  .layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 420px) {
+  .brand { font-size: 19px; white-space: nowrap; gap: 8px; }
+  .header-inner { gap: 12px; }
+  .brand svg { width: 36px; height: 36px; }
+  .metric { padding: 12px 10px; }
+  .metric strong { font-size: 24px; }
+  .activity-heading h2 { font-size: 18px; }
+}
